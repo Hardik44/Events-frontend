@@ -1,0 +1,18 @@
+
+<div class="card-columns">
+  	<div *ngFor="let item of events; let i=index;">
+  		<div class="card text-center">
+    		<div class="card-body">
+      			<h5 class="card-title">{{item.title}}</h5>
+      			<p class="card-text">{{item.description}}</p>
+      			
+      			<div class="card-body text-left">
+				    <p class="card-text"><small class="text-muted">Starts at {{item.start_date}} {{item.start_time}}</small></p>
+			    	<p class="card-text"><small class="text-muted">Ends at {{item.end_date}} {{item.end_time}}</small></p>
+			  	</div>
+			  	<button class="btn btn-primary mb-2" (click)="deleteEvent(item.id)">Delete this Event</button>
+			</div>
+		</div>
+	</div>
+</div>
+

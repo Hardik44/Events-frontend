@@ -1,0 +1,119 @@
+<h1>Fill your event details</h1>
+<div class="card" style="width: 1000px">
+  <div class="card-body">
+		<form [formGroup]="add_event_form" (ngSubmit)="onSubmit(add_event_form.value)">
+		 
+		 <h2>Event</h2>
+		 <br>
+
+		  <div class="form-group">
+		    <label for="title">
+		      Title
+		    </label>
+		    <input id="title" class="form-control" type="text" formControlName="title">
+		  </div>
+
+		  <div class="form-group">
+		    <div class="form-check">
+		      <input class="form-check-input" type="checkbox" id="all_day" formControlName="all_day" ng-model="disable_time">
+		      <label class="form-check-label" for="all_day">
+		        All Day
+		      </label>
+		    </div>
+		  </div>
+
+		  <br>
+		 
+		  <div class="form-row">
+		  	<div class="form-group col-md-6">
+		    <label for="start_date">
+		      Start Date
+		    </label>
+		    <input id="start_date" type="date" formControlName="start_date">
+		    </div>
+
+		    <div class="form-group col-md-6">
+		    	<label for="start_time">
+			      Start Time
+			    </label>
+			    <input id="start_time" type="time" formControlName="start_time" ng-disabled="disable_time">
+		    </div>
+		  </div>
+
+		  <div class="form-row">
+			  <div class="form-group col-md-6">
+			    <label for="end_date">
+			      End Date
+			    </label>
+			    <input id="end_date" type="date" formControlName="end_date">
+			  </div>
+
+			  <div class="form-group col-md-6">
+			    <label for="end_time">
+			      End Time
+			    </label>
+			    <input id="end_time" type="time" formControlName="end_time" ng-disabled="disable_time">
+			  </div>
+		  </div>
+
+		  
+
+		  <br>
+
+		  <h2>Event Details:</h2>
+
+		  <br>
+
+		  <div class="form-group">
+		    <label for="location">
+		      Location
+		    </label>
+		    <input id="location" class="form-control" type="text" formControlName="location">
+		  </div>
+
+		  <div class="form-group">
+		    <label for="email">
+		      Email
+		    </label>
+		    <input id="email" class="form-control" type="email" formControlName="email">
+		  </div>
+
+		  <div class="form-group">
+		    <label for="description">
+		      Description
+		    </label>
+		    <input id="description" class="form-control" type="textarea" formControlName="description">
+		  </div>
+
+		  <!--<div class="form-group">
+		    <label for="guest_list">
+		      Guest List
+		    </label>
+		    <input id="guest_list" class="form-control" type="email" formControlName="guest_list">
+		  </div>
+
+		-->
+
+		  <div formArrayName="guest_list">
+		  	<h2>Guest List: </h2> <br> 
+		  	<button class="btn btn-primary mb-2" (click)="addGuest()">Add Guest</button> <br>
+
+		  	<div *ngFor="let address of guest_list.controls; let i=index;">
+
+		  		<div class="form-group">
+			    	<label>
+			      	Guest {{i}}:
+			      	<input type="email" [formControlName]="i">
+			      	<a (click)="removeGuest(i)" class="button fancy-button">
+			      		<i class="material-icons">remove_circle</i>
+			      	</a>
+			    	</label>
+			    </div>
+		  	</div>
+		  </div>
+
+		  <button class="btn btn-primary mb-2" [disabled]="!add_event_form.valid" type="submit">Submit</button>
+		 
+		</form>
+	</div>
+</div>
