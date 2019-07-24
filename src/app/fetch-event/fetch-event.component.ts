@@ -25,7 +25,7 @@ export class FetchEventComponent implements OnInit {
 
   deleteEvent(i: number): void{
   	console.log('Got item' + i);
-  	localStorage.removeItem(i);
+  	localStorage.removeItem(i+"");
   	location.reload();
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-list',
@@ -14,6 +15,7 @@ export class EventListComponent implements OnInit {
 
   constructor(
   	private formBuilder: FormBuilder,
+  	private router: Router,
   	) {
   		this.add_event_form = this.formBuilder.group({
   			title: ['', Validators.required],
@@ -33,7 +35,7 @@ export class EventListComponent implements OnInit {
   		});
 
   		if (localStorage.getItem("key") === null){
-  			localStorage.setItem("key", 0);
+  			localStorage.setItem("key", "0");
   		}
   	}
 
@@ -60,19 +62,19 @@ export class EventListComponent implements OnInit {
     	customerData.start_time = null;
     	customerData.end_time = null;
     }
-    let key = localStorage.getItem("key");
+    let key = +localStorage.getItem("key");
     key++;
     customerData.id = key;
     let serializedForm = JSON.stringify(customerData);
 
-    localStorage.setItem(key, serializedForm);
-    localStorage.setItem("key", key);
+    localStorage.setItem(key+"", serializedForm);
+    localStorage.setItem("key", key+"");
  
     this.add_event_form.reset();
 
     alert('Event added Successfully!');
 
-    window.location = '';
+    this.router.navigate(['']);
   }
 
 }
